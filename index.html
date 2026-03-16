@@ -210,17 +210,39 @@
     .note-box .nt { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
     .note-box .nb { font-size: 13px; color: var(--sub); line-height: 1.8; }
 
-    /* ── SEO footer ── */
-    footer { background: #08080C; border-top: 1px solid var(--border); padding: 48px 24px; color: #44445A; font-size: 13px; line-height: 1.9; }
-    .footer-inner { max-width: 860px; margin: 0 auto; }
-    footer h2 { font-size: 14px; font-weight: 700; color: #66668A; margin-bottom: 14px; }
-    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    /* ── Ad slot ── */
+    .ad-slot { margin: 24px 0; text-align: center; min-height: 90px; }
+
+    /* ── Accordion ── */
+    .accordion { border-top: 1px solid var(--border); margin-top: 8px; }
+    .accordion details { border-bottom: 1px solid var(--border); }
+    .accordion summary {
+      list-style: none; cursor: pointer;
+      padding: 16px 4px;
+      font-size: 14px; font-weight: 700; color: var(--sub);
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .accordion summary::-webkit-details-marker { display: none; }
+    .accordion summary::after {
+      content: '+'; font-size: 18px; font-weight: 400;
+      color: var(--muted); transition: transform .2s;
+    }
+    .accordion details[open] summary::after { content: '−'; }
+    .accordion details[open] summary { color: var(--text); }
+    .accordion-body { padding: 4px 0 20px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
     @media(max-width:560px){ .faq-grid { grid-template-columns: 1fr; } }
-    .faq-item { background: #10101A; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-    .faq-item .fq { font-size: 12px; color: #44445A; margin-bottom: 4px; }
-    .faq-item .fa { font-size: 14px; font-weight: 600; color: #88889A; }
-    footer p { max-width: 680px; margin-bottom: 4px; }
-    footer hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .faq-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .faq-item .fq { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .faq-item .fa { font-size: 13px; font-weight: 600; color: var(--sub); }
+    .acc-text { font-size: 14px; color: var(--sub); line-height: 1.9; max-width: 680px; }
+    .acc-text strong { color: var(--text); }
+
+    /* ── SEO footer ── */
+    footer { background: #08080C; border-top: 1px solid var(--border); padding: 24px; }
+    .footer-inner { max-width: 860px; margin: 0 auto; }
+    footer p { font-size: 12px; color: #33334A; margin-bottom: 4px; }
     footer a { color: inherit; }
 
     @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
@@ -406,34 +428,65 @@
       </div>
     </div>
   </div>
+
+  <!-- ── 광고 슬롯 (계산기 하단) ── -->
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6037343600471239"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ── 아코디언 FAQ ── -->
+  <div class="accordion" aria-label="자주 묻는 질문 및 참고 정보">
+
+    <details>
+      <summary>가격별 취등록세 예상 비용</summary>
+      <div class="accordion-body">
+        <div class="faq-grid">
+          <div class="faq-item"><div class="fq">500만원 중고차 취등록세</div><div class="fa">취득세 약 31만원 · 총 부대비 약 45만원</div></div>
+          <div class="faq-item"><div class="fq">1,000만원 중고차 취등록세</div><div class="fa">취득세 약 63만원 · 총 부대비 약 90만원</div></div>
+          <div class="faq-item"><div class="fq">1,500만원 중고차 취등록세</div><div class="fa">취득세 약 95만원 · 총 부대비 약 135만원</div></div>
+          <div class="faq-item"><div class="fq">2,000만원 중고차 취등록세</div><div class="fa">취득세 약 127만원 · 총 부대비 약 180만원</div></div>
+          <div class="faq-item"><div class="fq">3,000만원 중고차 취등록세</div><div class="fa">취득세 약 191만원 · 서울 총 부대비 약 420만원</div></div>
+          <div class="faq-item"><div class="fq">5,000만원 중고차 취등록세</div><div class="fa">취득세 약 318만원 · 서울 총 부대비 약 690만원</div></div>
+          <div class="faq-item"><div class="fq">전기차 취득세 2026</div><div class="fa">최대 140만원 감면 · 2026년 12월까지</div></div>
+          <div class="faq-item"><div class="fq">경차 취득세 감면</div><div class="fa">최대 75만원 감면 · 2027년까지 연장</div></div>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>취등록세란 무엇인가요?</summary>
+      <div class="accordion-body">
+        <p class="acc-text">중고차 취등록세는 차량 취득 시 납부하는 <strong>취득세</strong>와 <strong>지방교육세</strong>를 합쳐 부르는 말입니다. 취득세는 구매가격에서 부가세(10%)를 제외한 과세표준에 차량 유형별 세율(비영업용 승용차 7%, 경차 4%, 화물·승합 5%)을 적용해 계산합니다. 지방교육세는 취득세의 30%가 추가 부과됩니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>공채매입이란?</summary>
+      <div class="accordion-body">
+        <p class="acc-text">공채(지역개발채권)는 차량 등록 시 의무적으로 매입해야 하는 채권입니다. 2023년 3월부터 1,600cc 이하 차량은 전국적으로 공채매입 의무가 폐지되었습니다. 1,600cc 초과 차량은 서울 12%, 경기·인천 9%, 광역시 7%, 그 외 지역 4%의 비율로 매입해야 합니다. 대부분의 경우 즉시매도(할인매각)를 통해 약 97.5%를 환급받을 수 있습니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>중고차 이전등록비는 얼마인가요?</summary>
+      <div class="accordion-body">
+        <p class="acc-text">이전등록 수수료는 이전등록 수수료 8,000원, 번호판 제작비 약 55,000원으로 총 약 63,000원 수준입니다. 대행업체를 이용하는 경우 대행료(약 10~20만원)가 추가될 수 있습니다.</p>
+      </div>
+    </details>
+
+  </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <h2>중고차 취등록세 계산기 — 가격별 예상 비용 (2026년 기준)</h2>
-    <div class="faq-grid">
-      <div class="faq-item"><div class="fq">500만원 중고차 취등록세</div><div class="fa">취득세 약 31만원 · 총 부대비 약 45만원</div></div>
-      <div class="faq-item"><div class="fq">1,000만원 중고차 취등록세</div><div class="fa">취득세 약 63만원 · 총 부대비 약 90만원</div></div>
-      <div class="faq-item"><div class="fq">1,500만원 중고차 취등록세</div><div class="fa">취득세 약 95만원 · 총 부대비 약 135만원</div></div>
-      <div class="faq-item"><div class="fq">2,000만원 중고차 취등록세</div><div class="fa">취득세 약 127만원 · 총 부대비 약 180만원</div></div>
-      <div class="faq-item"><div class="fq">3,000만원 중고차 취등록세</div><div class="fa">취득세 약 191만원 · 서울 총 부대비 약 420만원</div></div>
-      <div class="faq-item"><div class="fq">5,000만원 중고차 취등록세</div><div class="fa">취득세 약 318만원 · 서울 총 부대비 약 690만원</div></div>
-      <div class="faq-item"><div class="fq">전기차 취득세 2026</div><div class="fa">최대 140만원 감면 · 2026년 12월까지</div></div>
-      <div class="faq-item"><div class="fq">경차 취득세 감면</div><div class="fa">최대 75만원 감면 · 2027년까지 연장</div></div>
-    </div>
-
-    <h3 style="font-size:13px;font-weight:700;color:#66668A;margin:20px 0 8px">취등록세란 무엇인가요?</h3>
-    <p>중고차 취등록세는 차량 취득 시 납부하는 <strong style="color:#66668A">취득세</strong>와 <strong style="color:#66668A">지방교육세</strong>를 합쳐 부르는 말입니다. 취득세는 구매가격에서 부가세(10%)를 제외한 과세표준에 차량 유형별 세율(비영업용 승용차 7%, 경차 4%, 화물·승합 5%)을 적용해 계산합니다. 지방교육세는 취득세의 30%가 추가 부과됩니다.</p>
-
-    <h3 style="font-size:13px;font-weight:700;color:#66668A;margin:16px 0 8px">공채매입이란?</h3>
-    <p>공채(지역개발채권)는 차량 등록 시 의무적으로 매입해야 하는 채권입니다. 2023년 3월부터 1,600cc 이하 차량은 전국적으로 공채매입 의무가 폐지되었습니다. 1,600cc 초과 차량은 서울 12%, 경기·인천 9%, 광역시 7%, 그 외 지역 4%의 비율로 매입해야 합니다. 대부분의 경우 즉시매도(할인매각)를 통해 약 97.5%를 환급받을 수 있습니다.</p>
-
-    <h3 style="font-size:13px;font-weight:700;color:#66668A;margin:16px 0 8px">중고차 이전등록비는 얼마인가요?</h3>
-    <p>이전등록 수수료는 이전등록 수수료 8,000원, 번호판 제작비 약 55,000원으로 총 약 63,000원 수준입니다. 대행업체를 이용하는 경우 대행료(약 10~20만원)가 추가될 수 있습니다.</p>
-
-    <hr>
-    <p style="font-size:12px;color:#33334A">본 계산기는 참고용이며 실제 납부액과 차이가 있을 수 있습니다. 정확한 금액은 관할 시·군·구청 차량등록사업소에 문의하세요.</p>
-    <p style="font-size:12px;color:#33334A;margin-top:4px">© 2026 취등록세계산기 · <a href="privacy.html">개인정보처리방침</a> · <a href="mailto:coco.shin@handys.co.kr">문의하기</a></p>
+    <p>본 계산기는 참고용이며 실제 납부액과 차이가 있을 수 있습니다. 정확한 금액은 관할 시·군·구청 차량등록사업소에 문의하세요.</p>
+    <p style="margin-top:6px">© 2026 취등록세계산기 · <a href="privacy.html">개인정보처리방침</a> · <a href="mailto:coco.shin@handys.co.kr">문의하기</a></p>
   </div>
 </footer>
 
