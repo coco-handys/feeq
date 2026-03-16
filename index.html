@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>중고차 취등록세 계산기 2026 - 취득세 공채 이전비 자동 계산</title>
+  <meta name="description" content="2026년 기준 중고차 취등록세 계산기. 취득세·지방교육세·공채매입비·이전등록비 자동 계산. 경차·전기차·하이브리드 감면 반영. 지역별 공채 비율 적용.">
+  <meta name="keywords" content="중고차 취등록세 계산기,취득세 계산,공채매입 계산,중고차 이전비,취등록세 2026,자동차 취득세,중고차 부대비용">
+  <meta property="og:title" content="중고차 취등록세 계산기 2026">
+  <meta property="og:description" content="취득세·공채·이전비 한 번에 계산. 2026년 최신 기준 적용.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/car">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:image" content="https://yourdomain.com/og-car.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="중고차 취등록세 계산기 2026">
+  <meta name="twitter:description" content="취득세·공채·이전비 한 번에 계산. 2026년 최신 기준 적용.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yourdomain.com/car">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"중고차 취등록세 계산기 2026","description":"중고차 취득세, 지방교육세, 공채매입비, 이전등록비 자동 계산","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"중고차 취득세율은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년 기준 비영업용 승용차 7%, 경차(1,000cc 미만) 4%, 영업용 4%, 화물·승합 5%입니다. 지방교육세는 취득세의 30%가 추가됩니다."}},
+    {"@type":"Question","name":"중고차 공채매입이란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"차량 등록 시 의무적으로 매입해야 하는 지역개발채권입니다. 1,600cc 이하 차량은 2023년 3월부터 공채매입 의무가 없어졌습니다. 1,600cc 초과 차량은 지역에 따라 차량가액의 4~12%를 매입해야 합니다."}},
+    {"@type":"Question","name":"전기차 취등록세 감면은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"2026년까지 전기차는 취득세 최대 140만원까지 감면됩니다. 수소전기차는 2027년까지 동일 혜택이 적용됩니다."}}
+  ]}
+  </script>
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0C10;
+      --surface: #14141C;
+      --surface2: #1A1A25;
+      --surface3: #20202E;
+      --border: #2A2A3E;
+      --border2: #363650;
+      --text: #F0F0F8;
+      --sub: #9898B8;
+      --muted: #55556A;
+      --accent: #4F7FFF;
+      --accent-lt: #1A2A4A;
+      --green: #22C55E;
+      --green-lt: #0D2218;
+      --red: #F87171;
+      --red-lt: #2A0F0F;
+      --amber: #FBBF24;
+      --amber-lt: #2A1F08;
+      --radius: 14px;
+      --radius-lg: 20px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(12,12,16,0.9);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .hdr { max-width: 860px; margin: 0 auto; padding: 0 24px; height: 62px; display: flex; align-items: center; gap: 14px; }
+    .logo { font-size: 16px; font-weight: 800; color: var(--text); letter-spacing: -.3px; }
+    .logo em { color: var(--accent); font-style: normal; }
+    .tag { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+    .tag-blue { color: var(--accent); background: var(--accent-lt); border: 1px solid #2A3A6A; }
+    .tag-green { color: #22C55E; background: var(--green-lt); border: 1px solid #1A4A2A; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ── Update banner ── */
+    .banner {
+      background: var(--amber-lt);
+      border: 1px solid #4A3010;
+      border-radius: 12px;
+      padding: 13px 18px;
+      margin-bottom: 24px;
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 13px; color: #D4A820; line-height: 1.7;
+    }
+    .banner strong { font-weight: 700; }
+
+    /* ── Two-col layout ── */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+    }
+    .card-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    /* ── Field ── */
+    .field { margin-bottom: 18px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: var(--sub); margin-bottom: 7px; }
+
+    /* Text input */
+    .input-wrap { display: flex; align-items: center; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; transition: border-color .15s; }
+    .input-wrap:focus-within { border-color: var(--accent); }
+    .input-wrap input { flex: 1; border: none; background: transparent; padding: 12px 14px; font-family: inherit; font-size: 16px; font-weight: 700; color: var(--text); outline: none; min-width: 0; }
+    .input-wrap input::placeholder { color: var(--muted); font-weight: 400; }
+    .input-wrap .unit { padding-right: 14px; font-size: 14px; color: var(--muted); font-weight: 500; flex-shrink: 0; }
+
+    /* Select */
+    select {
+      width: 100%; padding: 12px 14px;
+      background: var(--surface2); border: 1.5px solid var(--border);
+      border-radius: 10px; font-family: inherit; font-size: 15px;
+      font-weight: 600; color: var(--text); outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2355556A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    select:focus { border-color: var(--accent); }
+    select option { background: #1A1A25; }
+
+    /* Radio pills */
+    .radio-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .radio-group input[type=radio] { display: none; }
+    .radio-group label {
+      padding: 8px 16px; border-radius: 99px;
+      border: 1.5px solid var(--border); font-size: 14px; font-weight: 600;
+      color: var(--sub); cursor: pointer; transition: all .15s; white-space: nowrap;
+    }
+    .radio-group input[type=radio]:checked + label {
+      border-color: var(--accent); background: var(--accent-lt); color: var(--accent);
+    }
+    .radio-group label:hover { border-color: var(--border2); color: var(--text); }
+
+    /* ── Price display ── */
+    .price-display {
+      background: linear-gradient(135deg, #0E1628 0%, #141422 100%);
+      border: 1px solid #2A3A5A;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-display::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .pd-label { font-size: 13px; color: var(--sub); font-weight: 500; margin-bottom: 8px; }
+    .pd-amount { font-size: 52px; font-weight: 900; color: var(--accent); letter-spacing: -2.5px; line-height: 1; }
+    .pd-unit { font-size: 20px; font-weight: 600; color: var(--sub); margin-left: 4px; letter-spacing: 0; }
+    .pd-sub { font-size: 13px; color: var(--muted); margin-top: 10px; }
+    .pd-sub span { color: var(--sub); font-weight: 500; }
+
+    /* ── Breakdown ── */
+    .breakdown { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
+    .bk-head { padding: 18px 24px; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 700; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+    .bk-head .yr { font-size: 12px; font-weight: 500; color: var(--muted); }
+    .bk-row { display: flex; align-items: center; padding: 15px 24px; border-bottom: 1px solid var(--border); }
+    .bk-row:last-child { border-bottom: none; }
+    .bk-dot { width: 7px; height: 7px; border-radius: 50%; margin-right: 14px; flex-shrink: 0; }
+    .bk-name { font-size: 14px; color: var(--sub); flex: 1; }
+    .bk-note { font-size: 12px; color: var(--muted); margin-right: 16px; }
+    .bk-val { font-size: 16px; font-weight: 700; min-width: 100px; text-align: right; color: var(--text); }
+    .bk-val.neg { color: var(--red); }
+    .bk-val.pos { color: var(--green); }
+    .bk-row.total { background: var(--surface2); }
+    .bk-row.total .bk-name { font-weight: 700; color: var(--text); }
+    .bk-row.total .bk-val { font-size: 18px; color: var(--accent); }
+    .discount-row { background: var(--green-lt); border-top: 1px solid #1A3A2A !important; }
+    .discount-row .bk-name { color: #4ADE80; }
+    .discount-row .bk-val { color: #4ADE80; }
+
+    /* ── 즉시환급 토글 ── */
+    .bond-toggle-wrap { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .bt-desc { font-size: 13px; color: var(--sub); line-height: 1.6; }
+    .bt-desc strong { color: var(--text); font-weight: 600; display: block; margin-bottom: 2px; }
+    .toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; inset: 0; background: var(--border2); border-radius: 99px; cursor: pointer; transition: background .2s; }
+    .toggle-slider::after { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: transform .2s; }
+    .toggle input:checked + .toggle-slider { background: var(--accent); }
+    .toggle input:checked + .toggle-slider::after { transform: translateX(20px); }
+
+    /* ── Note box ── */
+    .note-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; }
+    .note-box .nt { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+    .note-box .nb { font-size: 13px; color: var(--sub); line-height: 1.8; }
+
+    /* ── SEO footer ── */
+    footer { background: #08080C; border-top: 1px solid var(--border); padding: 48px 24px; color: #44445A; font-size: 13px; line-height: 1.9; }
+    .footer-inner { max-width: 860px; margin: 0 auto; }
+    footer h2 { font-size: 14px; font-weight: 700; color: #66668A; margin-bottom: 14px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    @media(max-width:560px){ .faq-grid { grid-template-columns: 1fr; } }
+    .faq-item { background: #10101A; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .faq-item .fq { font-size: 12px; color: #44445A; margin-bottom: 4px; }
+    .faq-item .fa { font-size: 14px; font-weight: 600; color: #88889A; }
+    footer p { max-width: 680px; margin-bottom: 4px; }
+    footer hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    footer a { color: inherit; }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fadeUp .25s ease; }
+
+    @media (max-width: 480px) {
+      .pd-amount { font-size: 38px; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <div class="logo">취등록세 <em>계산기</em></div>
+    <div class="tag tag-blue">2026 기준</div>
+    <div class="tag tag-green">전기차 감면 반영</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h1 style="font-size:22px;font-weight:900;color:var(--text);letter-spacing:-.5px;margin-bottom:16px">중고차 취등록세 계산기 <span style="font-size:14px;font-weight:600;color:var(--sub);letter-spacing:0">2026년 최신 기준</span></h1>
+
+  <div class="banner">
+    <span style="font-size:15px;flex-shrink:0;margin-top:1px">📢</span>
+    <div>
+      <strong>2026년 주요 변경사항</strong> —
+      전기차 취득세 최대 140만원 감면 <strong>2026년 12월까지 연장</strong> &nbsp;·&nbsp;
+      1,600cc 이하 공채매입 <strong>전국 면제 유지</strong> &nbsp;·&nbsp;
+      경차 취득세 75만원 감면 <strong>2027년까지 연장</strong>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ── 입력 ── -->
+    <div>
+      <div class="card">
+        <div class="card-label">차량 정보 입력</div>
+
+        <div class="field">
+          <label>차량 구매가격 (부가세 포함)</label>
+          <div class="input-wrap">
+            <input type="text" id="price" inputmode="numeric" placeholder="예: 15,000,000"
+              oninput="onPriceInput(this)" onblur="fmtInput(this)" onfocus="unfmtInput(this)">
+            <span class="unit">원</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>차량 유형</label>
+          <select id="carType" onchange="calc()">
+            <option value="normal">비영업용 승용차 (일반)</option>
+            <option value="mini">경차 (1,000cc 미만)</option>
+            <option value="ev">전기차</option>
+            <option value="hybrid">하이브리드</option>
+            <option value="commercial">영업용 승용차</option>
+            <option value="truck">화물·승합차</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>배기량</label>
+          <div class="radio-group">
+            <input type="radio" id="cc1" name="cc" value="under1600" checked onchange="calc()">
+            <label for="cc1">1,600cc 이하</label>
+            <input type="radio" id="cc2" name="cc" value="over1600" onchange="calc()">
+            <label for="cc2">1,600cc 초과</label>
+          </div>
+        </div>
+
+        <div class="field" id="regionField">
+          <label>등록 지역 <span style="font-size:11px;color:var(--muted)">(공채 비율 적용)</span></label>
+          <select id="region" onchange="calc()">
+            <option value="seoul">서울특별시 (12%)</option>
+            <option value="gyeonggi">경기도·인천 (9%)</option>
+            <option value="metro">광역시 (부산·대구·광주·대전·울산) (7%)</option>
+            <option value="other">그 외 도·군 (4%)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>이전등록비 포함</label>
+          <div class="radio-group">
+            <input type="radio" id="reg1" name="reg" value="yes" checked onchange="calc()">
+            <label for="reg1">포함</label>
+            <input type="radio" id="reg2" name="reg" value="no" onchange="calc()">
+            <label for="reg2">제외</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 결과 ── -->
+    <div id="result-col">
+
+      <div class="price-display fade-up">
+        <div class="pd-label">총 부대비용 (취등록비 합계)</div>
+        <div>
+          <span class="pd-amount" id="total-display">—</span>
+          <span class="pd-unit">원</span>
+        </div>
+        <div class="pd-sub" id="total-sub">차량 구매가격을 입력하면 바로 계산됩니다</div>
+      </div>
+
+      <div class="bond-toggle-wrap" id="bond-toggle-wrap" style="display:none">
+        <div class="bt-desc">
+          <strong>공채 즉시매도 (할인 매각)</strong>
+          약 2.5% 수수료로 즉시 환급 · 비용 절감 가능
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="bondSell" checked onchange="calc()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="breakdown" id="breakdown" style="display:none">
+        <div class="bk-head">
+          세부 비용 내역
+          <span class="yr">2026년 기준</span>
+        </div>
+        <div class="bk-row">
+          <span class="bk-dot" style="background:#9898B8"></span>
+          <span class="bk-name">차량 과세표준 (VAT 제외)</span>
+          <span class="bk-note"></span>
+          <span class="bk-val" id="b-base">—</span>
+        </div>
+        <div class="bk-row">
+          <span class="bk-dot" style="background:#4F7FFF"></span>
+          <span class="bk-name">취득세</span>
+          <span class="bk-note" id="b-acq-rate">7%</span>
+          <span class="bk-val neg" id="b-acq">—</span>
+        </div>
+        <div class="bk-row" id="discount-acq-row" style="display:none">
+          <span class="bk-dot" style="background:#22C55E"></span>
+          <span class="bk-name" id="discount-acq-label">감면 혜택</span>
+          <span class="bk-note"></span>
+          <span class="bk-val pos" id="b-discount">—</span>
+        </div>
+        <div class="bk-row">
+          <span class="bk-dot" style="background:#818CF8"></span>
+          <span class="bk-name">지방교육세</span>
+          <span class="bk-note">취득세×30%</span>
+          <span class="bk-val neg" id="b-edu">—</span>
+        </div>
+        <div class="bk-row" id="bond-row" style="display:none">
+          <span class="bk-dot" style="background:#FBBF24"></span>
+          <span class="bk-name">공채 매입금액</span>
+          <span class="bk-note" id="b-bond-rate">—</span>
+          <span class="bk-val neg" id="b-bond">—</span>
+        </div>
+        <div class="bk-row discount-row" id="bond-sell-row" style="display:none">
+          <span class="bk-dot" style="background:#4ADE80"></span>
+          <span class="bk-name">공채 즉시매도 환급</span>
+          <span class="bk-note">약 97.5% 환급</span>
+          <span class="bk-val pos" id="b-bond-sell">—</span>
+        </div>
+        <div class="bk-row" id="reg-fee-row">
+          <span class="bk-dot" style="background:#55556A"></span>
+          <span class="bk-name">이전등록 수수료</span>
+          <span class="bk-note">고정</span>
+          <span class="bk-val neg" id="b-reg">—</span>
+        </div>
+        <div class="bk-row total">
+          <span class="bk-dot" style="background:#4F7FFF"></span>
+          <span class="bk-name">총 부대비용</span>
+          <span class="bk-note"></span>
+          <span class="bk-val" id="b-total">—</span>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <div class="nt">ℹ 계산 기준 안내</div>
+        <div class="nb">
+          과세표준 = 구매가격 ÷ 1.1 (VAT 제외)<br>
+          1,600cc 이하: 전국 공채매입 의무 없음 (2023년 3월~)<br>
+          전기차 취득세 감면 140만원 한도 (2026년 12월까지)<br>
+          공채 즉시매도 할인율 약 2.5% (시기·은행에 따라 변동)<br>
+          이전등록비: 이전등록 8,000원 + 번호판 55,000원 포함
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <h2>중고차 취등록세 계산기 — 가격별 예상 비용 (2026년 기준)</h2>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="fq">500만원 중고차 취등록세</div><div class="fa">취득세 약 31만원 · 총 부대비 약 45만원</div></div>
+      <div class="faq-item"><div class="fq">1,000만원 중고차 취등록세</div><div class="fa">취득세 약 63만원 · 총 부대비 약 90만원</div></div>
+      <div class="faq-item"><div class="fq">1,500만원 중고차 취등록세</div><div class="fa">취득세 약 95만원 · 총 부대비 약 135만원</div></div>
+      <div class="faq-item"><div class="fq">2,000만원 중고차 취등록세</div><div class="fa">취득세 약 127만원 · 총 부대비 약 180만원</div></div>
+      <div class="faq-item"><div class="fq">3,000만원 중고차 취등록세</div><div class="fa">취득세 약 191만원 · 서울 총 부대비 약 420만원</div></div>
+      <div class="faq-item"><div class="fq">5,000만원 중고차 취등록세</div><div class="fa">취득세 약 318만원 · 서울 총 부대비 약 690만원</div></div>
+      <div class="faq-item"><div class="fq">전기차 취득세 2026</div><div class="fa">최대 140만원 감면 · 2026년 12월까지</div></div>
+      <div class="faq-item"><div class="fq">경차 취득세 감면</div><div class="fa">최대 75만원 감면 · 2027년까지 연장</div></div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:#66668A;margin:20px 0 8px">취등록세란 무엇인가요?</h3>
+    <p>중고차 취등록세는 차량 취득 시 납부하는 <strong style="color:#66668A">취득세</strong>와 <strong style="color:#66668A">지방교육세</strong>를 합쳐 부르는 말입니다. 취득세는 구매가격에서 부가세(10%)를 제외한 과세표준에 차량 유형별 세율(비영업용 승용차 7%, 경차 4%, 화물·승합 5%)을 적용해 계산합니다. 지방교육세는 취득세의 30%가 추가 부과됩니다.</p>
+
+    <h3 style="font-size:13px;font-weight:700;color:#66668A;margin:16px 0 8px">공채매입이란?</h3>
+    <p>공채(지역개발채권)는 차량 등록 시 의무적으로 매입해야 하는 채권입니다. 2023년 3월부터 1,600cc 이하 차량은 전국적으로 공채매입 의무가 폐지되었습니다. 1,600cc 초과 차량은 서울 12%, 경기·인천 9%, 광역시 7%, 그 외 지역 4%의 비율로 매입해야 합니다. 대부분의 경우 즉시매도(할인매각)를 통해 약 97.5%를 환급받을 수 있습니다.</p>
+
+    <h3 style="font-size:13px;font-weight:700;color:#66668A;margin:16px 0 8px">중고차 이전등록비는 얼마인가요?</h3>
+    <p>이전등록 수수료는 이전등록 수수료 8,000원, 번호판 제작비 약 55,000원으로 총 약 63,000원 수준입니다. 대행업체를 이용하는 경우 대행료(약 10~20만원)가 추가될 수 있습니다.</p>
+
+    <hr>
+    <p style="font-size:12px;color:#33334A">본 계산기는 참고용이며 실제 납부액과 차이가 있을 수 있습니다. 정확한 금액은 관할 시·군·구청 차량등록사업소에 문의하세요.</p>
+    <p style="font-size:12px;color:#33334A;margin-top:4px">© 2026 취등록세계산기 · <a href="#">개인정보처리방침</a></p>
+  </div>
+</footer>
+
+<script>
+const fmt  = n => Math.round(n).toLocaleString('ko-KR');
+const fmtW = n => fmt(n) + '원';
+
+function getRaw(el) { return +(el.value.replace(/,/g,'')) || 0; }
+function fmtInput(el) { const v = getRaw(el); if(v) el.value = v.toLocaleString('ko-KR'); }
+function unfmtInput(el) { const v = getRaw(el); if(v) el.value = v; }
+function onPriceInput(el) {
+  const raw = el.value.replace(/[^0-9]/g,'');
+  const pos = el.selectionStart;
+  el.value = raw ? (+raw).toLocaleString('ko-KR') : '';
+  try { el.setSelectionRange(pos, pos); } catch(e){}
+  calc();
+}
+
+const s = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+const show = (id, vis) => { const el = document.getElementById(id); if(el) el.style.display = vis ? '' : 'none'; };
+
+/* ── 공채 비율 ── */
+const BOND_RATES = { seoul:0.12, gyeonggi:0.09, metro:0.07, other:0.04 };
+
+/* ── 취득세율 ── */
+function getAcqRate(type) {
+  if (type === 'mini') return 0.04;
+  if (type === 'commercial') return 0.04;
+  if (type === 'truck') return 0.05;
+  return 0.07; // normal, ev, hybrid
+}
+
+function calc() {
+  const priceEl  = document.getElementById('price');
+  const price    = getRaw(priceEl);
+  const carType  = document.getElementById('carType').value;
+  const cc       = document.querySelector('input[name=cc]:checked').value;
+  const region   = document.getElementById('region').value;
+  const inclReg  = document.querySelector('input[name=reg]:checked').value === 'yes';
+  const bondSell = document.getElementById('bondSell').checked;
+
+  /* 지역 필드: 1600이하면 숨김 */
+  const needBond = cc === 'over1600' && carType !== 'ev';
+  show('regionField', needBond);
+  show('bond-toggle-wrap', needBond);
+
+  if (!price || price <= 0) {
+    s('total-display', '—');
+    s('total-sub', '차량 구매가격을 입력하면 바로 계산됩니다');
+    show('breakdown', false);
+    return;
+  }
+
+  /* 과세표준: VAT 제외 */
+  const base = Math.round(price / 1.1);
+
+  /* 취득세 계산 */
+  const acqRate = getAcqRate(carType);
+  let acqTax = Math.round(base * acqRate);
+
+  /* 감면 계산 */
+  let discount = 0;
+  let discountLabel = '';
+  if (carType === 'ev') {
+    discount = Math.min(acqTax, 1400000);
+    discountLabel = '전기차 취득세 감면 (최대 140만원)';
+  } else if (carType === 'hybrid') {
+    discount = Math.min(acqTax, 400000);
+    discountLabel = '하이브리드 취득세 감면 (최대 40만원)';
+  } else if (carType === 'mini') {
+    discount = Math.min(acqTax, 750000);
+    discountLabel = '경차 취득세 감면 (최대 75만원)';
+  }
+  const acqFinal = Math.max(0, acqTax - discount);
+
+  /* 지방교육세: 취득세(감면 전)의 30%, 단 감면 후 취득세 기준으로도 계산하는 게 실무 */
+  const eduTax = Math.round(acqFinal * 0.3);
+
+  /* 공채 */
+  let bondAmount = 0;
+  let bondRefund = 0;
+  let bondCost = 0;
+  if (needBond) {
+    bondAmount = Math.round(base * BOND_RATES[region]);
+    bondRefund = bondSell ? Math.round(bondAmount * 0.975) : 0;
+    bondCost = bondAmount - bondRefund;
+  }
+
+  /* 이전등록비 */
+  const regFee = inclReg ? 63000 : 0; // 이전등록 8,000 + 번호판 55,000
+
+  /* 총합 */
+  const total = acqFinal + eduTax + bondCost + regFee;
+
+  /* ── UI 업데이트 ── */
+  document.getElementById('total-display').textContent = fmt(total);
+  document.getElementById('total-sub').innerHTML =
+    `차량가격 <span>${fmtW(price)}</span> 기준 · 과세표준 <span>${fmtW(base)}</span>`;
+
+  show('breakdown', true);
+  document.getElementById('breakdown').classList.add('fade-up');
+  setTimeout(() => document.getElementById('breakdown').classList.remove('fade-up'), 300);
+
+  s('b-base',   fmtW(base));
+  s('b-acq',    '- ' + fmtW(acqTax));
+  s('b-acq-rate', (acqRate * 100).toFixed(0) + '%');
+  s('b-edu',    '- ' + fmtW(eduTax));
+  s('b-reg',    inclReg ? '- ' + fmtW(regFee) : '제외');
+
+  /* 감면 행 */
+  show('discount-acq-row', discount > 0);
+  if (discount > 0) {
+    s('discount-acq-label', discountLabel);
+    s('b-discount', '+ ' + fmtW(discount));
+  }
+
+  /* 공채 행 */
+  show('bond-row', needBond);
+  show('bond-sell-row', needBond && bondSell);
+  if (needBond) {
+    const rate = (BOND_RATES[region] * 100).toFixed(0);
+    s('b-bond-rate', rate + '%');
+    s('b-bond', '- ' + fmtW(bondAmount));
+    s('b-bond-sell', '+ ' + fmtW(bondRefund));
+  }
+
+  s('b-total', fmtW(total));
+
+  /* 이전등록비 행 */
+  show('reg-fee-row', true);
+}
+
+/* 초기 실행 */
+document.addEventListener('DOMContentLoaded', () => {
+  const priceEl = document.getElementById('price');
+  priceEl.value = '15,000,000';
+  calc();
+});
+</script>
+</body>
+</html>
