@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자동차세 계산기 2026 - 배기량별 연납 할인 자동 계산</title>
+  <meta name="description" content="2026년 자동차세 계산기. 배기량별 자동차세·지방교육세 자동 계산. 연납 할인(최대 10%) 적용. 차령 경감률 반영. 전기차·영업용 지원.">
+  <meta name="keywords" content="자동차세 계산기,자동차세 2026,자동차세 연납,배기량별 자동차세,지방교육세,자동차세 경감,전기차 자동차세">
+  <meta property="og:title" content="자동차세 계산기 2026">
+  <meta property="og:description" content="배기량·차령·연납 할인 반영. 2026년 최신 기준 자동 계산.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://feeq.pages.dev/cartax.html">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="자동차세 계산기 2026">
+  <meta name="twitter:description" content="배기량·차령·연납 할인 반영. 2026년 최신 기준 자동 계산.">
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="HxPJJVnVQrf6XfI75VDClfB6W6Fp4U3qsO5ciVLqdDg" />
+  <meta name="google-adsense-account" content="ca-pub-6037343600471239">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6037343600471239"
+     crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://feeq.pages.dev/cartax.html">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"자동차세 계산기 2026","description":"배기량별 자동차세, 지방교육세, 연납 할인, 차령 경감률 자동 계산","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"자동차세는 언제 납부하나요?","acceptedAnswer":{"@type":"Answer","text":"자동차세는 1년에 2번, 6월(1~6월분)과 12월(7~12월분)에 나눠 납부합니다. 연납 신청 시 1월에 한 번에 납부하고 최대 10% 할인을 받을 수 있습니다."}},
+    {"@type":"Question","name":"자동차세 연납 할인율은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"연납 신청 월별 할인율: 1월 10%, 3월 7.5%, 6월 5%, 9월 2.5%입니다. 1월에 신청할수록 할인율이 높습니다."}},
+    {"@type":"Question","name":"오래된 차는 자동차세가 낮아지나요?","acceptedAnswer":{"@type":"Answer","text":"네, 차령(차량 연식)에 따라 자동차세가 경감됩니다. 3년 이상부터 매년 5%씩 경감되며 최대 12년 이상은 50%까지 낮아집니다."}}
+  ]}
+  </script>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0C10;
+      --surface: #14141C;
+      --surface2: #1A1A25;
+      --surface3: #20202E;
+      --border: #2A2A3E;
+      --border2: #363650;
+      --text: #F0F0F8;
+      --sub: #9898B8;
+      --muted: #55556A;
+      --accent: #4F7FFF;
+      --accent-lt: #1A2A4A;
+      --green: #22C55E;
+      --green-lt: #0D2218;
+      --red: #F87171;
+      --red-lt: #2A0F0F;
+      --amber: #FBBF24;
+      --amber-lt: #2A1F08;
+      --radius: 14px;
+      --radius-lg: 20px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      font-size: 16px; line-height: 1.5; min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(12,12,16,0.9);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 50;
+    }
+    .hdr { max-width: 860px; margin: 0 auto; padding: 0 24px; height: 62px; display: flex; align-items: center; gap: 14px; }
+    .logo { font-size: 16px; font-weight: 800; color: var(--text); letter-spacing: -.3px; text-decoration: none; }
+    .logo em { color: var(--accent); font-style: normal; }
+    .tag { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+    .tag-blue { color: var(--accent); background: var(--accent-lt); border: 1px solid #2A3A6A; }
+    .tag-green { color: #22C55E; background: var(--green-lt); border: 1px solid #1A4A2A; }
+
+    /* ── Nav tools ── */
+    .tool-nav { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+    .tool-nav::-webkit-scrollbar { display: none; }
+    .tool-nav-wrap { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .tool-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 14px; font-size: 13px; font-weight: 600;
+      color: var(--muted); text-decoration: none; white-space: nowrap;
+      border-bottom: 2px solid transparent; transition: color .15s;
+    }
+    .tool-link:hover { color: var(--sub); }
+    .tool-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── Layout ── */
+    .wrap { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ── Banner ── */
+    .banner {
+      background: var(--amber-lt); border: 1px solid #4A3010;
+      border-radius: 12px; padding: 13px 18px; margin-bottom: 24px;
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 13px; color: #D4A820; line-height: 1.7;
+    }
+    .banner strong { font-weight: 700; }
+
+    /* ── Grid ── */
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ── Card ── */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+    .card-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
+
+    /* ── Field ── */
+    .field { margin-bottom: 18px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: var(--sub); margin-bottom: 7px; }
+
+    .input-wrap { display: flex; align-items: center; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; transition: border-color .15s; }
+    .input-wrap:focus-within { border-color: var(--accent); }
+    .input-wrap input { flex: 1; border: none; background: transparent; padding: 12px 14px; font-family: inherit; font-size: 16px; font-weight: 700; color: var(--text); outline: none; min-width: 0; }
+    .input-wrap input::placeholder { color: var(--muted); font-weight: 400; }
+    .input-wrap .unit { padding-right: 14px; font-size: 14px; color: var(--muted); font-weight: 500; flex-shrink: 0; }
+
+    select {
+      width: 100%; padding: 12px 14px;
+      background: var(--surface2); border: 1.5px solid var(--border);
+      border-radius: 10px; font-family: inherit; font-size: 15px;
+      font-weight: 600; color: var(--text); outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2355556A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+      cursor: pointer; transition: border-color .15s;
+    }
+    select:focus { border-color: var(--accent); }
+    select option { background: #1A1A25; }
+
+    /* ── Price display ── */
+    .price-display {
+      background: linear-gradient(135deg, #0E1628 0%, #141422 100%);
+      border: 1px solid #2A3A5A; border-radius: var(--radius-lg);
+      padding: 28px; margin-bottom: 20px;
+      position: relative; overflow: hidden;
+    }
+    .price-display::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .pd-label { font-size: 13px; color: var(--sub); font-weight: 500; margin-bottom: 8px; }
+    .pd-amount { font-size: 52px; font-weight: 900; color: var(--accent); letter-spacing: -2.5px; line-height: 1; }
+    .pd-unit { font-size: 20px; font-weight: 600; color: var(--sub); margin-left: 4px; letter-spacing: 0; }
+    .pd-sub { font-size: 13px; color: var(--muted); margin-top: 10px; }
+    .pd-sub span { color: var(--sub); font-weight: 500; }
+
+    /* ── Breakdown ── */
+    .breakdown { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
+    .bk-head { padding: 18px 24px; border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 700; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
+    .bk-head .yr { font-size: 12px; font-weight: 500; color: var(--muted); }
+    .bk-row { display: flex; align-items: center; padding: 15px 24px; border-bottom: 1px solid var(--border); }
+    .bk-row:last-child { border-bottom: none; }
+    .bk-dot { width: 7px; height: 7px; border-radius: 50%; margin-right: 14px; flex-shrink: 0; }
+    .bk-name { font-size: 14px; color: var(--sub); flex: 1; }
+    .bk-note { font-size: 12px; color: var(--muted); margin-right: 16px; }
+    .bk-val { font-size: 16px; font-weight: 700; min-width: 100px; text-align: right; color: var(--text); }
+    .bk-val.neg { color: var(--red); }
+    .bk-val.pos { color: var(--green); }
+    .bk-row.total { background: var(--surface2); }
+    .bk-row.total .bk-name { font-weight: 700; color: var(--text); }
+    .bk-row.total .bk-val { font-size: 18px; color: var(--accent); }
+    .discount-row { background: var(--green-lt); border-top: 1px solid #1A3A2A !important; }
+    .discount-row .bk-name { color: #4ADE80; }
+    .discount-row .bk-val { color: #4ADE80; }
+
+    /* ── Note box ── */
+    .note-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; }
+    .note-box .nt { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+    .note-box .nb { font-size: 13px; color: var(--sub); line-height: 1.8; }
+
+    /* ── Ad slot ── */
+    .ad-slot { margin: 24px 0; text-align: center; min-height: 90px; }
+
+    /* ── Accordion ── */
+    .accordion { border-top: 1px solid var(--border); margin-top: 8px; }
+    .accordion details { border-bottom: 1px solid var(--border); }
+    .accordion summary {
+      list-style: none; cursor: pointer;
+      padding: 16px 4px; font-size: 14px; font-weight: 700; color: var(--sub);
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .accordion summary::-webkit-details-marker { display: none; }
+    .accordion summary::after { content: '+'; font-size: 18px; font-weight: 400; color: var(--muted); }
+    .accordion details[open] summary::after { content: '−'; }
+    .accordion details[open] summary { color: var(--text); }
+    .accordion-body { padding: 4px 0 20px; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+    @media(max-width:560px){ .faq-grid { grid-template-columns: 1fr; } }
+    .faq-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .faq-item .fq { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .faq-item .fa { font-size: 13px; font-weight: 600; color: var(--sub); }
+    .acc-text { font-size: 14px; color: var(--sub); line-height: 1.9; max-width: 680px; }
+    .acc-text strong { color: var(--text); }
+
+    /* ── Footer ── */
+    footer { background: #08080C; border-top: 1px solid var(--border); padding: 24px; }
+    .footer-inner { max-width: 860px; margin: 0 auto; }
+    footer p { font-size: 12px; color: #33334A; margin-bottom: 4px; }
+    footer a { color: inherit; }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fadeUp .25s ease; }
+
+    @media (max-width: 480px) {
+      .pd-amount { font-size: 38px; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">취등록세 <em>계산기</em></a>
+  </div>
+</header>
+
+<div class="tool-nav-wrap">
+  <div class="tool-nav">
+    <a href="index.html" class="tool-link">중고차 취등록세</a>
+    <a href="cartax.html" class="tool-link active">자동차세</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <h1 style="font-size:22px;font-weight:900;color:var(--text);letter-spacing:-.5px;margin-bottom:16px">자동차세 계산기 <span style="font-size:14px;font-weight:600;color:var(--sub);letter-spacing:0">2026년 최신 기준</span></h1>
+
+  <div class="banner">
+    <span style="font-size:15px;flex-shrink:0;margin-top:1px">📢</span>
+    <div>
+      <strong>연납 할인 안내</strong> —
+      1월 신청 <strong>10% 할인</strong> &nbsp;·&nbsp;
+      3월 <strong>7.5%</strong> &nbsp;·&nbsp;
+      6월 <strong>5%</strong> &nbsp;·&nbsp;
+      9월 <strong>2.5%</strong> &nbsp;·&nbsp;
+      차령 3년부터 매년 5%씩 경감, <strong>최대 50%</strong>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- ── 입력 ── -->
+    <div>
+      <div class="card">
+        <div class="card-label">차량 정보 입력</div>
+
+        <div class="field">
+          <label>차량 유형</label>
+          <select id="carType" onchange="onTypeChange()">
+            <option value="normal">비영업용 승용차</option>
+            <option value="ev">전기차</option>
+            <option value="commercial">영업용 승용차</option>
+          </select>
+        </div>
+
+        <div class="field" id="ccField">
+          <label>배기량</label>
+          <div class="input-wrap">
+            <input type="text" id="cc" inputmode="numeric" placeholder="예: 1998"
+              oninput="onCcInput(this)" onblur="fmtInput(this)" onfocus="unfmtInput(this)">
+            <span class="unit">cc</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>차량 연식 <span style="font-size:11px;color:var(--muted)">(경과 연수별 경감 적용)</span></label>
+          <select id="age" onchange="calc()">
+            <option value="0">1~2년 (경감 없음)</option>
+            <option value="3">3년 (5% 경감)</option>
+            <option value="4">4년 (10% 경감)</option>
+            <option value="5">5년 (15% 경감)</option>
+            <option value="6">6년 (20% 경감)</option>
+            <option value="7">7년 (25% 경감)</option>
+            <option value="8">8년 (30% 경감)</option>
+            <option value="9">9년 (35% 경감)</option>
+            <option value="10">10년 (40% 경감)</option>
+            <option value="11">11년 (45% 경감)</option>
+            <option value="12">12년 이상 (50% 경감)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>연납 신청</label>
+          <select id="prepay" onchange="calc()">
+            <option value="0">없음 (6월·12월 분납)</option>
+            <option value="0.10">1월 연납 (10% 할인)</option>
+            <option value="0.075">3월 연납 (7.5% 할인)</option>
+            <option value="0.05">6월 연납 (5% 할인)</option>
+            <option value="0.025">9월 연납 (2.5% 할인)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 결과 ── -->
+    <div id="result-col">
+
+      <div class="price-display fade-up">
+        <div class="pd-label">연간 자동차세 납부액</div>
+        <div>
+          <span class="pd-amount" id="total-display">—</span>
+          <span class="pd-unit">원</span>
+        </div>
+        <div class="pd-sub" id="total-sub">배기량을 입력하면 바로 계산됩니다</div>
+      </div>
+
+      <div class="breakdown" id="breakdown" style="display:none">
+        <div class="bk-head">
+          세부 내역
+          <span class="yr">2026년 기준</span>
+        </div>
+        <div class="bk-row">
+          <span class="bk-dot" style="background:#4F7FFF"></span>
+          <span class="bk-name">자동차세 (기본)</span>
+          <span class="bk-note" id="b-rate-note"></span>
+          <span class="bk-val neg" id="b-base-tax">—</span>
+        </div>
+        <div class="bk-row" id="age-discount-row" style="display:none">
+          <span class="bk-dot" style="background:#22C55E"></span>
+          <span class="bk-name" id="age-discount-label">차령 경감</span>
+          <span class="bk-note"></span>
+          <span class="bk-val pos" id="b-age-discount">—</span>
+        </div>
+        <div class="bk-row">
+          <span class="bk-dot" style="background:#818CF8"></span>
+          <span class="bk-name">지방교육세</span>
+          <span class="bk-note">자동차세×30%</span>
+          <span class="bk-val neg" id="b-edu">—</span>
+        </div>
+        <div class="bk-row discount-row" id="prepay-row" style="display:none">
+          <span class="bk-dot" style="background:#4ADE80"></span>
+          <span class="bk-name" id="prepay-label">연납 할인</span>
+          <span class="bk-note"></span>
+          <span class="bk-val pos" id="b-prepay-discount">—</span>
+        </div>
+        <div class="bk-row total">
+          <span class="bk-dot" style="background:#4F7FFF"></span>
+          <span class="bk-name">최종 납부액</span>
+          <span class="bk-note"></span>
+          <span class="bk-val" id="b-total">—</span>
+        </div>
+        <div class="bk-row" id="split-row" style="display:none">
+          <span class="bk-dot" style="background:#55556A"></span>
+          <span class="bk-name" style="color:var(--muted)">6월·12월 각 납부액</span>
+          <span class="bk-note"></span>
+          <span class="bk-val" style="font-size:14px;color:var(--muted)" id="b-split">—</span>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <div class="nt">ℹ 계산 기준 안내</div>
+        <div class="nb">
+          비영업용: ~1,000cc 80원/cc · ~1,600cc 140원/cc · 초과 200원/cc<br>
+          영업용: ~1,600cc 18원/cc · 초과 19원/cc<br>
+          전기차: 연 100,000원 정액 (지방교육세 별도)<br>
+          차령 3년 이상부터 5%씩 경감, 12년+ 최대 50% 경감
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 광고 슬롯 ── -->
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6037343600471239"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ── 아코디언 FAQ ── -->
+  <div class="accordion">
+
+    <details>
+      <summary>배기량별 자동차세 예시</summary>
+      <div class="accordion-body">
+        <div class="faq-grid">
+          <div class="faq-item"><div class="fq">1,000cc 이하 (경차)</div><div class="fa">연 약 8만원 (지방교육세 포함)</div></div>
+          <div class="faq-item"><div class="fq">1,600cc (예: 아반떼)</div><div class="fa">연 약 29만원 (지방교육세 포함)</div></div>
+          <div class="faq-item"><div class="fq">1,998cc (예: 쏘나타)</div><div class="fa">연 약 52만원 (지방교육세 포함)</div></div>
+          <div class="faq-item"><div class="fq">2,497cc (예: 그랜저)</div><div class="fa">연 약 65만원 (지방교육세 포함)</div></div>
+          <div class="faq-item"><div class="fq">3,342cc (예: 제네시스)</div><div class="fa">연 약 87만원 (지방교육세 포함)</div></div>
+          <div class="faq-item"><div class="fq">전기차 (EV)</div><div class="fa">연 13만원 정액 (차령 무관)</div></div>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>자동차세 납부 시기와 연납 방법</summary>
+      <div class="accordion-body">
+        <p class="acc-text">자동차세는 1년에 2회 부과됩니다. <strong>6월(1~6월분)</strong>과 <strong>12월(7~12월분)</strong>에 각각 절반씩 납부합니다. 연납 신청을 하면 1년치를 한 번에 납부하고 할인을 받을 수 있습니다. 위택스(wetax.go.kr) 또는 스마트위택스 앱에서 신청 가능합니다.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>차령에 따른 자동차세 경감률</summary>
+      <div class="accordion-body">
+        <p class="acc-text">차량 최초 등록일 기준으로 경과 연수에 따라 자동차세가 경감됩니다. <strong>3년 5%</strong>, 4년 10%, 5년 15%, 6년 20%, 7년 25%, 8년 30%, 9년 35%, 10년 40%, 11년 45%, <strong>12년 이상 50%</strong> 경감됩니다. 전기차는 차령 경감 적용이 되지 않습니다.</p>
+      </div>
+    </details>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p>본 계산기는 참고용이며 실제 납부액과 차이가 있을 수 있습니다. 정확한 금액은 위택스(wetax.go.kr) 또는 관할 시·군·구청에 문의하세요.</p>
+    <p style="margin-top:6px">© 2026 취등록세계산기 · <a href="privacy.html">개인정보처리방침</a> · <a href="mailto:coco.shin@handys.co.kr">문의하기</a></p>
+  </div>
+</footer>
+
+<script>
+const fmt  = n => Math.round(n).toLocaleString('ko-KR');
+const fmtW = n => fmt(n) + '원';
+function getRaw(el) { return +(el.value.replace(/,/g,'')) || 0; }
+function fmtInput(el) { const v = getRaw(el); if(v) el.value = v.toLocaleString('ko-KR'); }
+function unfmtInput(el) { const v = getRaw(el); if(v) el.value = v; }
+function onCcInput(el) {
+  const raw = el.value.replace(/[^0-9]/g,'');
+  el.value = raw ? (+raw).toLocaleString('ko-KR') : '';
+  calc();
+}
+const s    = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+const show = (id, vis) => { const el = document.getElementById(id); if(el) el.style.display = vis ? '' : 'none'; };
+
+function onTypeChange() {
+  const type = document.getElementById('carType').value;
+  show('ccField', type !== 'ev');
+  calc();
+}
+
+function getBaseTax(cc, type) {
+  if (type === 'ev') return 100000;
+  if (type === 'commercial') {
+    if (cc <= 1600) return cc * 18;
+    return cc * 19;
+  }
+  // normal
+  if (cc <= 1000) return cc * 80;
+  if (cc <= 1600) return cc * 140;
+  return cc * 200;
+}
+
+function getRateNote(cc, type) {
+  if (type === 'ev') return '정액';
+  if (type === 'commercial') return cc <= 1600 ? '18원/cc' : '19원/cc';
+  if (cc <= 1000) return '80원/cc';
+  if (cc <= 1600) return '140원/cc';
+  return '200원/cc';
+}
+
+function calc() {
+  const type    = document.getElementById('carType').value;
+  const cc      = type === 'ev' ? 0 : getRaw(document.getElementById('cc'));
+  const age     = +document.getElementById('age').value;
+  const prepayRate = +document.getElementById('prepay').value;
+
+  if (type !== 'ev' && (!cc || cc <= 0)) {
+    s('total-display', '—');
+    s('total-sub', '배기량을 입력하면 바로 계산됩니다');
+    show('breakdown', false);
+    return;
+  }
+
+  const baseTax = getBaseTax(cc, type);
+
+  // 차령 경감 (전기차 제외)
+  const ageRate = (type === 'ev') ? 0 : (age >= 3 ? Math.min((age - 2) * 5, 50) : 0);
+  const ageDiscount = Math.round(baseTax * ageRate / 100);
+  const taxAfterAge = baseTax - ageDiscount;
+
+  // 지방교육세
+  const eduTax = Math.round(taxAfterAge * 0.3);
+
+  // 연납 전 합계
+  const beforePrepay = taxAfterAge + eduTax;
+
+  // 연납 할인
+  const prepayDiscount = Math.round(beforePrepay * prepayRate);
+  const total = beforePrepay - prepayDiscount;
+
+  // UI
+  document.getElementById('total-display').textContent = fmt(total);
+  const subText = prepayRate > 0
+    ? `연납 할인 <span>${fmtW(prepayDiscount)}</span> 적용 후`
+    : `6월·12월 각 <span>${fmtW(Math.round(total / 2))}</span> 납부`;
+  document.getElementById('total-sub').innerHTML = subText;
+
+  show('breakdown', true);
+  document.getElementById('breakdown').classList.add('fade-up');
+  setTimeout(() => document.getElementById('breakdown').classList.remove('fade-up'), 300);
+
+  s('b-base-tax', '- ' + fmtW(baseTax));
+  s('b-rate-note', getRateNote(cc, type));
+  s('b-edu', '- ' + fmtW(eduTax));
+  s('b-total', fmtW(total));
+
+  show('age-discount-row', ageDiscount > 0);
+  if (ageDiscount > 0) {
+    s('age-discount-label', `차령 경감 (${ageRate}%)`);
+    s('b-age-discount', '+ ' + fmtW(ageDiscount));
+  }
+
+  show('prepay-row', prepayDiscount > 0);
+  if (prepayDiscount > 0) {
+    s('prepay-label', `연납 할인 (${(prepayRate * 100)}%)`);
+    s('b-prepay-discount', '+ ' + fmtW(prepayDiscount));
+  }
+
+  show('split-row', prepayRate === 0);
+  s('b-split', fmtW(Math.round(total / 2)) + ' × 2회');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('cc').value = '1,998';
+  calc();
+});
+</script>
+</body>
+</html>

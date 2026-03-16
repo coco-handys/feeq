@@ -245,6 +245,19 @@
     footer p { font-size: 12px; color: #33334A; margin-bottom: 4px; }
     footer a { color: inherit; }
 
+    /* ── Nav tools ── */
+    .tool-nav-wrap { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .tool-nav { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+    .tool-nav::-webkit-scrollbar { display: none; }
+    .tool-link {
+      display: inline-flex; align-items: center;
+      padding: 10px 14px; font-size: 13px; font-weight: 600;
+      color: var(--muted); text-decoration: none; white-space: nowrap;
+      border-bottom: 2px solid transparent; transition: color .15s;
+    }
+    .tool-link:hover { color: var(--sub); }
+    .tool-link.active { color: var(--accent); border-bottom-color: var(--accent); }
+
     @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
     .fade-up { animation: fadeUp .25s ease; }
 
@@ -263,6 +276,13 @@
     <div class="tag tag-green">전기차 감면 반영</div>
   </div>
 </header>
+
+<div class="tool-nav-wrap">
+  <div class="tool-nav">
+    <a href="index.html" class="tool-link active">중고차 취등록세</a>
+    <a href="cartax.html" class="tool-link">자동차세</a>
+  </div>
+</div>
 
 <div class="wrap">
 
